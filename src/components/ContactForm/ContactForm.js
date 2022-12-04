@@ -43,12 +43,11 @@ const initialValues = {
 
 export const ContactForm = ({ onSubmit }) => {
 
- const handleSubmit  = e => {
-   e.preventDefault();
-   onSubmit(
-     e.target.elements.initialValues
-   );
-};
+  
+  const handleSubmit = (values, { resetForm }) => {
+    onSubmit({ ...values });
+    resetForm();
+  }
   return (
     <Formik
       initialValues={initialValues}
