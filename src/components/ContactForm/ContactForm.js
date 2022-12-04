@@ -18,6 +18,8 @@ const schema = yup.object().shape({
   name: yup
     .string()
     .required()
+    .min(3)
+    .max(16)
     .matches(
       nameValidate,
       "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -25,6 +27,8 @@ const schema = yup.object().shape({
   number: yup
     .string()
     .required()
+    .min(6)
+    .max(10)
     .matches(
       phoneValidate,
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
@@ -36,7 +40,15 @@ const initialValues = {
   number: '',
 };
 
-export const ContactForm = ({ handleSubmit }) => {
+
+export const ContactForm = ({ onSubmit }) => {
+
+ const handleSubmit  = e => {
+   e.preventDefault();
+   onSubmit(
+     e.target.elements.initialValues
+   );
+};
   return (
     <Formik
       initialValues={initialValues}
